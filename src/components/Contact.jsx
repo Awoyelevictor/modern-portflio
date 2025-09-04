@@ -90,7 +90,7 @@ const Contact = () => {
                 <a href="https://x.com/FistPhoeni76748?t=Rz65iNEkrZ1hokO1j8Oeag&s=09" className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
                   <i className="fab fa-twitter text-gray-700 dark:text-gray-300"></i>
                 </a>
-                <a href="#" className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+                <a href="https://www.instagram.com/awoyele.victor.31/" className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
                   <i className="fab fa-instagram text-gray-700 dark:text-gray-300"></i>
                 </a>
               </div>

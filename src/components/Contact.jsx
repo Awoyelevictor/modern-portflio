@@ -53,7 +53,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-gray-800 dark:text-white">WhatsApp</h3>
-                  <p className="text-gray-600 dark:text-gray-400"> <a href="https://wa.me/2347017304536">+234 701 730 4536</a> </p>
+                  <p className="text-gray-600 dark:text-gray-400"> <a href="https://wa.me/2347017304536?text=Hello%20I%20just%20visited%20your%20portfolio%20and%20I’d%20like%20to%20work%20with%20you">+234 701 730 4536</a> </p>
                 </div>
               </div>
 
@@ -81,16 +81,16 @@ const Contact = () => {
             <div className="mt-8">
               <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Follow Me</h3>
               <div className="flex space-x-4">
-                <a href="https://github.com/Awoyelevictor" className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+                <a href="https://github.com/Awoyelevictor" target='_blank' className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
                   <i className="fab fa-github text-gray-700 dark:text-gray-300"></i>
                 </a>
-                <a href="www.linkedin.com/in/awoyele-victor" className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+                <a href="https://www.linkedin.com/in/awoyele-victor" target='_blank' className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
                   <i className="fab fa-linkedin text-gray-700 dark:text-gray-300"></i>
                 </a>
-                <a href="https://x.com/FistPhoeni76748?t=Rz65iNEkrZ1hokO1j8Oeag&s=09" className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+                <a href="https://x.com/FistPhoeni76748?t=Rz65iNEkrZ1hokO1j8Oeag&s=09" target='_blank' className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
                   <i className="fab fa-twitter text-gray-700 dark:text-gray-300"></i>
                 </a>
-                <a href="https://www.instagram.com/awoyele.victor.31/" className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+                <a href="https://www.instagram.com/awoyele.victor.31/" target='_blank' className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
                   <i className="fab fa-instagram text-gray-700 dark:text-gray-300"></i>
                 </a>
               </div>

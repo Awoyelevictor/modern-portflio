@@ -24,7 +24,7 @@ export const projectsData = [
     tags: ["React", "JSON", "CSS"],
     icon: "fas fa-globe",
     link: "https://example.com/phoenix-blog",
-    github: "https://github.com/username/phoenix-blog"
+    github: "https://github.com/Awoyelevictor/phoenix-blog"
   },
   {
     id: 4,
@@ -32,7 +32,15 @@ export const projectsData = [
     description: "A personal portfolio website showcasing my projects, skills, and experience.",
     tags: ["React", "CSS"],
     icon: "fas fa-user",
-    link: "https://example.com/portfolio",
-    github: "https://github.com/username/portfolio"
-  }
+    link: "https://modern-portflio.vercel.app/",
+    github: "https://github.com/Awoyelevictor/modern-portfolio"
+  },
+{    id: 5,
+    title:"E-commerce Platform",
+    description: "A scalable payment gateway integration for secure online transactions.",
+    tags: ["HTML", "CSS", "JavaScript", "Paystack"],
+    icon: "fas fa-credit-card",
+    link: "https://payment-sigma-henna.vercel.app/",
+    github: "https://github.com/Awoyelevictor/My-test.git"
+}
 ];

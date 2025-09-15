@@ -6,7 +6,7 @@ export const projectsData = [
     tags: ["React", "Node.js"],
     icon: "fas fa-shopping-cart",
     link: "https://example.com/inventory-project",
-    github: "https://github.com/username/inventory-project"
+    github: "https://github.com/Oluseed/inventfront.git"
   },
   {
     id: 2,

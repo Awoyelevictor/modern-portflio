@@ -1,7 +1,11 @@
 /* index.css */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* CORRECT Tailwind directives for v3 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   font-family: 'Inter', sans-serif;
 }
@@ -10,20 +14,10 @@ html {
   scroll-behavior: smooth;
 }
 
-
 @keyframes morph {
   0%   { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
   50%  { border-radius: 70% 30% 30% 70% / 50% 50% 50% 50%; }
   100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-}
-@layer base {
-  body {
-    font-family: 'Inter', sans-serif;
-  }
-  
-  html {
-    scroll-behavior: smooth;
-  }
 }
 
 /* Custom scrollbar for dark mode */
@@ -42,4 +36,21 @@ html {
 
 .dark ::-webkit-scrollbar-thumb:hover {
   background: #6b7280;
+}
+
+/* Animation utility classes */
+.animate-morph {
+  animation: morph 10s infinite ease-in-out;
+}
+
+/* Add fade-in animation for elements */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
 }

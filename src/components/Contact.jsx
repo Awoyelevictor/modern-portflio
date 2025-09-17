@@ -1,6 +1,5 @@
 // components/Contact.jsx
-import { useState } from 'react';
-import emailjs from '@emailjs/browser';
+import { useState, useEffect } from 'react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +9,31 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [emailjsReady, setEmailjsReady] = useState(false);
+
+  // Check if EmailJS is loaded
+  useEffect(() => {
+    const checkEmailJS = () => {
+      if (typeof window !== 'undefined' && window.emailjs) {
+        setEmailjsReady(true);
+        return true;
+      }
+      return false;
+    };
+
+    // Check immediately
+    if (checkEmailJS()) return;
+
+    // If not ready, check every 100ms for up to 5 seconds
+    const interval = setInterval(() => {
+      if (checkEmailJS()) {
+        clearInterval(interval);
+      }
+    }, 100);
+
+    // Cleanup
+    return () => clearInterval(interval);
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -20,21 +44,27 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!emailjsReady) {
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus(null), 5000);
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus(null);
 
     try {
-      await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      await window.emailjs.send(
+        'service_3wvh4pe',
+        'template_hhxlcxl',
         {
           from_name: formData.name,
           from_email: formData.email,
           message: formData.message,
           to_email: 'awoyeleemma1@gmail.com',
           reply_to: formData.email
-        },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        }
       );
 
       setSubmitStatus('success');
@@ -220,7 +250,7 @@ const Contact = () => {
               
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || !emailjsReady}
                 className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white rounded-lg transition-colors flex items-center justify-center"
               >
                 {isSubmitting ? (

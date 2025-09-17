@@ -9,7 +9,7 @@ const Contact = () => {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null); // null, 'success', 'error'
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   const handleChange = (e) => {
     setFormData({
@@ -24,10 +24,9 @@ const Contact = () => {
     setSubmitStatus(null);
 
     try {
-      // Replace these with your actual EmailJS IDs
       await emailjs.send(
-        'service_3wvh4pe', // Replace with your EmailJS Service ID
-        'template_hhxlcxl', // Replace with your EmailJS Template ID
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         {
           from_name: formData.name,
           from_email: formData.email,
@@ -35,24 +34,17 @@ const Contact = () => {
           to_email: 'awoyeleemma1@gmail.com',
           reply_to: formData.email
         },
-        'DQIbN60mIinSwcYb0' // Replace with your EmailJS Public Key
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
 
       setSubmitStatus('success');
       setFormData({ name: '', email: '', message: '' });
       
-      // Clear success message after 5 seconds
-      setTimeout(() => {
-        setSubmitStatus(null);
-      }, 5000);
+      setTimeout(() => setSubmitStatus(null), 5000);
     } catch (error) {
       console.error('Failed to send message:', error);
       setSubmitStatus('error');
-      
-      // Clear error message after 5 seconds
-      setTimeout(() => {
-        setSubmitStatus(null);
-      }, 5000);
+      setTimeout(() => setSubmitStatus(null), 5000);
     } finally {
       setIsSubmitting(false);
     }
@@ -68,7 +60,6 @@ const Contact = () => {
           Have a project in mind or want to chat? Feel free to reach out!
         </p>
         
-        {/* Status Messages */}
         {submitStatus === 'success' && (
           <div className="mb-6 p-4 bg-green-100 text-green-700 rounded-lg">
             Thank you for your message! I'll get back to you soon.

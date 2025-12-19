@@ -5,6 +5,8 @@ import Hero from './components/Hero'
 import About from './components/About'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
+import Snowfall from 'react-snowfall'
+
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -30,6 +32,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-200">
+       <Snowfall color="white" />  {/* <-- this adds the snow */}
       <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
       <Hero />
       <About />

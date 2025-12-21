@@ -1,5 +1,5 @@
 import profilePic from "../assets/profile.jpg"
-import Snowfall from "react-snowfall";
+
 
 const Hero = () => {
   const scrollToSection = (sectionId) => {

@@ -1,4 +1,3 @@
-// App.jsx
 import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -8,51 +7,50 @@ import Contact from './components/Contact'
 import Snowfall from 'react-snowfall'
 
 function App() {
-  const [darkMode, setDarkMode] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const savedMode = localStorage.getItem('darkMode')
-      return savedMode ? JSON.parse(savedMode) : false
-    }
-    return false
-  })
-
+  const [darkMode, setDarkMode] = useState(false)
   const [showSnowfall, setShowSnowfall] = useState(false)
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
 
   useEffect(() => {
-    // Client-side only + seasonal check
-    const month = new Date().getMonth() // 0 = Jan, 11 = Dec
-    const isFestiveSeason = month === 11 || month === 0
+    const savedMode = localStorage.getItem('darkMode')
+    if (savedMode) setDarkMode(JSON.parse(savedMode))
 
-    if (isFestiveSeason) {
+    const month = new Date().getMonth() // 0 = Jan, 11 = Dec
+    if (month === 11 || month === 0) {
       setShowSnowfall(true)
     }
+
+    const updateSize = () => {
+      setDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      })
+    }
+
+    updateSize()
+    window.addEventListener('resize', updateSize)
+
+    return () => window.removeEventListener('resize', updateSize)
   }, [])
 
   useEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(darkMode))
-
-    if (darkMode) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
+    document.documentElement.classList.toggle('dark', darkMode)
   }, [darkMode])
 
   return (
     <>
-      {/* ❄️ Festive snowfall overlay */}
-      {showSnowfall && (
+      {showSnowfall && dimensions.width > 0 && (
         <Snowfall
-          color="white"
+          width={dimensions.width}
+          height={dimensions.height}
           snowflakeCount={85}
+          color="white"
           style={{
             position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: '100vh',
-            pointerEvents: 'none',
+            inset: 0,
             zIndex: 9999,
+            pointerEvents: 'none',
           }}
         />
       )}

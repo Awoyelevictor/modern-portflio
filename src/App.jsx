@@ -4,42 +4,35 @@ import Hero from './components/Hero'
 import About from './components/About'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
-import Snowfall from 'react-snowfall'
 
 function App() {
   const [darkMode, setDarkMode] = useState(false)
   const [showSnowfall, setShowSnowfall] = useState(false)
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
+  const [Snowfall, setSnowfall] = useState(null)
 
-  // Initialize dark mode & seasonal snow
   useEffect(() => {
+    // Dark mode
     const savedMode = localStorage.getItem('darkMode')
     if (savedMode) setDarkMode(JSON.parse(savedMode))
+    document.documentElement.classList.toggle('dark', savedMode === 'true')
 
-    // Show snow only in December (11) or January (0)
+    // Seasonal snow
     const month = new Date().getMonth()
     if (month === 11 || month === 0) setShowSnowfall(true)
 
-    // Set initial viewport dimensions
-    const updateSize = () => {
-      setDimensions({ width: window.innerWidth, height: window.innerHeight })
-    }
-    updateSize()
-    window.addEventListener('resize', updateSize)
-
-    return () => window.removeEventListener('resize', updateSize)
+    // Dynamically import Snowfall only on client
+    import('react-snowfall').then((mod) => setSnowfall(() => mod.default))
   }, [])
 
   // Persist dark mode
   useEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(darkMode))
-    document.documentElement.classList.toggle('dark', darkMode)
   }, [darkMode])
 
   return (
     <>
       {/* Snow overlay */}
-      {showSnowfall && dimensions.width > 0 && (
+      {showSnowfall && Snowfall && (
         <Snowfall
           snowflakeCount={85}
           color="white"
@@ -47,8 +40,8 @@ function App() {
             position: 'fixed',
             top: 0,
             left: 0,
-            width: dimensions.width,
-            height: dimensions.height,
+            width: '100vw',
+            height: '100vh',
             zIndex: 9999,
             pointerEvents: 'none',
           }}

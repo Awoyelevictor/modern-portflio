@@ -11,28 +11,26 @@ function App() {
   const [showSnowfall, setShowSnowfall] = useState(false)
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
 
+  // Initialize dark mode & seasonal snow
   useEffect(() => {
     const savedMode = localStorage.getItem('darkMode')
     if (savedMode) setDarkMode(JSON.parse(savedMode))
 
-    const month = new Date().getMonth() // 0 = Jan, 11 = Dec
-    if (month === 11 || month === 0) {
-      setShowSnowfall(true)
-    }
+    // Show snow only in December (11) or January (0)
+    const month = new Date().getMonth()
+    if (month === 11 || month === 0) setShowSnowfall(true)
 
+    // Set initial viewport dimensions
     const updateSize = () => {
-      setDimensions({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      })
+      setDimensions({ width: window.innerWidth, height: window.innerHeight })
     }
-
     updateSize()
     window.addEventListener('resize', updateSize)
 
     return () => window.removeEventListener('resize', updateSize)
   }, [])
 
+  // Persist dark mode
   useEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(darkMode))
     document.documentElement.classList.toggle('dark', darkMode)
@@ -40,22 +38,25 @@ function App() {
 
   return (
     <>
+      {/* Snow overlay */}
       {showSnowfall && dimensions.width > 0 && (
         <Snowfall
-          width={dimensions.width}
-          height={dimensions.height}
           snowflakeCount={85}
           color="white"
           style={{
             position: 'fixed',
-            inset: 0,
+            top: 0,
+            left: 0,
+            width: dimensions.width,
+            height: dimensions.height,
             zIndex: 9999,
             pointerEvents: 'none',
           }}
         />
       )}
 
-      <div className="min-h-screen bg-gray-50 text-gray-800 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-200">
+      {/* Main content */}
+      <div className="min-h-screen bg-gray-50 text-gray-800 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-200 relative z-10">
         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
         <Hero />
         <About />

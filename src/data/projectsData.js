@@ -10,12 +10,12 @@ export const projectsData = [
   },
   {
     id: 2,
-    title: "Task Management App",
+    title: "Ai Task Management App",
     description: "A drag-and-drop task management application with user authentication and real-time updates.",
-    tags: ["Next.js", "Firebase", "CSS"],
+    tags: ["React", "TypeScript", "JS"],
     icon: "fas fa-tasks",
-    link: "https://example.com/task-app",
-    github: "https://github.com/username/task-app"
+    link: "https://ai-task-manager-pros-471d.vercel.app/",
+    github: "https://github.com/Awoyelevictor/Ai-task-manager-pros/blob/main/App.tsx"
   },
   {
     id: 3,
